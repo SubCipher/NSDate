@@ -15,10 +15,8 @@
 @implementation KpNSDating
 
 
-- (void)updateTimer
+- (NSString *)methodToFormatDate: (NSDate *)dateToFormat
 {
-    NSDate *startDate = [NSDate date];
-
     
     //set date format: see:http://unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns
     
@@ -27,12 +25,8 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT: +4.0]];
     
     //convert date format into NSString object and read it into NSString var
-     //_invocationMethodString = [dateFormatter stringFromDate:date];
-    _startOneOffTimerString =[dateFormatter stringFromDate:startDate];
-    _timerStartedOnString = [dateFormatter stringFromDate:startDate];
-    
-    
-      //_startRepeatingTimerString = [dateFormatter stringFromDate:_repeatingTimer];
+     _dateFormatString = [dateFormatter stringFromDate:dateToFormat];
+    return _dateFormatString;
     
 }
 
@@ -41,17 +35,24 @@
 
 }
 
--(IBAction)timerStartedButtonAction:(id)sender{
-    [self updateTimer];
-    _timerStartedOnLabel.text = _timerStartedOnString;
-}
+
 
 - (void)targetMethod:(NSTimer*)theTimer {
-    [self updateTimer];
+    
     NSDate *startDate = [[theTimer userInfo] objectForKey:@"StartDate"];
     NSLog(@"Timer started on %@", startDate);
     
     }
+
+-(IBAction)timerStartedButtonAction:(id)sender{
+    
+    [self methodToFormatDate:[NSDate date]];
+    NSLog(@"%@",_dateFormatString);
+    _timerStartedOnLabel.text = _dateFormatString;
+}
+
+
+
 
 -(IBAction)invocationMethodButtonAction:(id)sende{
 
@@ -67,13 +68,13 @@
                                    selector:@selector(targetMethod:)
                                    userInfo:[self userInfo]
                                     repeats:NO];
-    [self updateTimer];
-    _startOneOffTimerLabel.text = _startOneOffTimerString ;
+//    [self updateTimer];
+//    _startOneOffTimerLabel.text = _startOneOffTimerString ;
 }
 
 
 - (void)invocationMethod:(NSDate *)date {
-    [self updateTimer];
+    //[self updateTimer];
    
     NSLog(@"Invocation for timer started on %@", date);
 }
@@ -93,8 +94,8 @@
     
     
     self.repeatingTimer = timer;
-   [self updateTimer];
-    _startRepeatingTimerLabel.text = _startRepeatingTimerString;
+//   [self updateTimer];
+//    _startRepeatingTimerLabel.text = _startRepeatingTimerString;
 }
 
 
