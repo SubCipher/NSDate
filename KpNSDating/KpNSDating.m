@@ -39,26 +39,20 @@
 
 - (void)targetMethod:(NSTimer*)theTimer {
     
-    NSDate *startDate = [[theTimer userInfo] objectForKey:@"StartDate"];
-    NSLog(@"Timer started on %@", startDate);
+    _startDate = [[theTimer userInfo] objectForKey:@"StartDate"];
+    NSLog(@"Timer started on %@", _startDate);
     
     }
 
+
 -(IBAction)timerStartedButtonAction:(id)sender{
     
-    [self methodToFormatDate:[NSDate date]];
+    [self methodToFormatDate:_startDate];
     NSLog(@"%@",_dateFormatString);
     _timerStartedOnLabel.text = _dateFormatString;
 }
 
 
-
-
--(IBAction)invocationMethodButtonAction:(id)sende{
-
-    _invocationMethodLabel.text = _invocationMethodString;
-    
-}
 
 
 - (IBAction)startOneOffTimer:sender {
@@ -68,8 +62,7 @@
                                    selector:@selector(targetMethod:)
                                    userInfo:[self userInfo]
                                     repeats:NO];
-//    [self updateTimer];
-//    _startOneOffTimerLabel.text = _startOneOffTimerString ;
+
 }
 
 
@@ -80,6 +73,11 @@
 }
 
 
+-(IBAction)invocationMethodButtonAction:(id)sende{
+    [self methodToFormatDate:[NSDate date]];
+    _invocationMethodLabel.text = _dateFormatString;
+    
+}
 
 
 
@@ -94,8 +92,7 @@
     
     
     self.repeatingTimer = timer;
-//   [self updateTimer];
-//    _startRepeatingTimerLabel.text = _startRepeatingTimerString;
+
 }
 
 
@@ -116,8 +113,6 @@
     NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 invocation:invocation repeats:YES];
     self.unregisteredTimer = timer;
     
-    _createUnregisteredTimerLabel.text = _createUnregisteredTimerString;
-    
 }
 
 - (IBAction)startUnregisteredTimer:sender {
@@ -126,7 +121,6 @@
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
         [runLoop addTimer:self.unregisteredTimer forMode:NSDefaultRunLoopMode];
         
-        //_startUnregisteredTimerLabel.text = _startUnregisteredTimerString;
     }
 }
 
@@ -144,7 +138,6 @@
     self.timerCount = 1;
     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
     [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
-    //_startFireDateTimerLabel = _startFireDateTimerString;
     
 }
 
