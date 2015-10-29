@@ -14,21 +14,18 @@
 @property (strong) NSTimer *unregisteredTimer;
 @property NSUInteger timerCount;
 
-
+@property (strong,nonatomic) NSString *dateFormatString;
 @property (strong,nonatomic) NSDateFormatter *dateformatter;
 @property (strong,nonatomic) NSString *timeString;
-@property (strong,nonatomic)NSDate *startDate;
+@property (strong,nonatomic) NSDate *startDate;
 
 
 
+- (void)targetMethod:(NSTimer *) theTimer;
+- (void)invocationMethod:(NSDate *) date;
+- (void)countedTimerFireMethod:(NSTimer*) theTimer;
 
-- (void)targetMethod:(NSTimer*)theTimer;
-- (void)invocationMethod:(NSDate *)date;
-- (void)countedTimerFireMethod:(NSTimer*)theTimer;
-
-- (NSString *)methodToFormatDate: (NSDate *)dateToFormat;
-@property(strong,nonatomic) NSString* dateFormatString;
-
+- (NSString *)methodToFormatDate: (NSDate *) dateToFormat;
 
 
 @property(strong,nonatomic)NSString *startOneOffTimerString;

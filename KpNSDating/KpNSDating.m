@@ -35,8 +35,6 @@
 
 }
 
-
-
 - (void)targetMethod:(NSTimer*)theTimer {
     
     _startDate = [[theTimer userInfo] objectForKey:@"StartDate"];
@@ -44,16 +42,12 @@
     
     }
 
-
 -(IBAction)timerStartedButtonAction:(id)sender{
     
     [self methodToFormatDate:_startDate];
     NSLog(@"%@",_dateFormatString);
     _timerStartedOnLabel.text = _dateFormatString;
 }
-
-
-
 
 - (IBAction)startOneOffTimer:sender {
     
@@ -64,7 +58,6 @@
                                     repeats:NO];
 
 }
-
 
 - (void)invocationMethod:(NSDate *)date {
     //[self updateTimer];
@@ -80,7 +73,6 @@
 }
 
 
-
 - (IBAction)startRepeatingTimer:sender {
     
     // Cancel a preexisting timer.
@@ -90,16 +82,9 @@
                                                       target:self selector:@selector(targetMethod:)
                                                     userInfo:[self userInfo] repeats:YES];
     
-    
     self.repeatingTimer = timer;
 
 }
-
-
-
-
-
-
 
 - (IBAction)createUnregisteredTimer:sender {
     
@@ -124,7 +109,6 @@
     }
 }
 
-
 - (IBAction)startFireDateTimer:sender {
     
     NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:1.0];
@@ -140,7 +124,6 @@
     [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
     
 }
-
 
 - (IBAction)stopRepeatingTimer:sender {
     [self.repeatingTimer invalidate];
